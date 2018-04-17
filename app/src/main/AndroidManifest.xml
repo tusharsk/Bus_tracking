@@ -46,6 +46,7 @@
             android:name=".PersonalInfo_fill"
             android:parentActivityName=".MainActivity" />
         <activity android:name=".PersonalInfo_show" />
-        <activity android:name=".History"></activity>
+        <activity android:name=".History" />
     </application>
+
 </manifest>
