@@ -95,12 +95,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        saveSettings= new SaveSettings(getApplicationContext());
+        /*saveSettings= new SaveSettings(getApplicationContext());
         saveSettings.LoadData();
         if(saveSettings.UserPresent().matches("0"))
         {
             finish();
-        }
+        }*/
 
 
 
@@ -409,7 +409,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onClick(final int x) {
 
-        AlertDialog.Builder mBuilder=new AlertDialog.Builder(MainActivity.this);
+        /*AlertDialog.Builder mBuilder=new AlertDialog.Builder(MainActivity.this);
         View mView=getLayoutInflater().inflate(R.layout.dialog_history,null);
         final EditText destination=(EditText)mView.findViewById(R.id.destination_5);
         final Button add=(Button)mView.findViewById(R.id.add_5);
@@ -425,7 +425,7 @@ public class MainActivity extends AppCompatActivity
         });
         mBuilder.setView(mView);
         AlertDialog dialog=mBuilder.create();
-        dialog.show();
+        dialog.show();*/
     }
 
     class Background_cab_list extends AsyncTask<Void,Void,String>
@@ -626,10 +626,11 @@ public class MainActivity extends AppCompatActivity
                     double Ambulance_latitude=UserCreintal.getDouble("latitude");
                     double Ambulance_longitude=UserCreintal.getDouble("longitude");
                     LatLng sydney = new LatLng(Ambulance_latitude,Ambulance_longitude);
-                    MarkerOptions options=new MarkerOptions().position(sydney).title("CAB"+i+1).icon(BitmapDescriptorFactory.fromResource(R.mipmap.cab));
+                    MarkerOptions options=new MarkerOptions().position(sydney).title("CAB"+i+1);
                     mMap.addMarker(options);
                 }
 
+                //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.cab))
                 //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)
 
             } catch (Exception ex) {
