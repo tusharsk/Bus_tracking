@@ -5,21 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#66BB6A"
+    android:background="#FFB300"
     >
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="CLICK TO SEE DRIVERS"
-        android:background="#009688"
-        android:gravity="center"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="67dp"
+        <ImageView
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="SLIDE ME"
+            android:gravity="center"
+            tools:layout_editor_absoluteX="148dp"
+            tools:layout_editor_absoluteY="67dp"
+            android:src="@drawable/slide_me"
+            tools:ignore="MissingConstraints"
+            />
 
-        tools:ignore="MissingConstraints"
-        />
+
+
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

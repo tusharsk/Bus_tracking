@@ -35,6 +35,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,6 +66,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,15 +80,16 @@ public class MainActivity extends AppCompatActivity
     SlidingUpPanelLayout slidingUpPanelLayout;
     double latitude=0; // latitude
     double longitude=0; // longitude
-    Button t;
+    ImageView t;
     Marker marker;
     String driver_name[];
     String driver_position[];
     String cab_no[];
     String driver_phone_number[];
-    String special[];
-    int rating[];
-    double time[];
+    String teacher[];
+    String no_of_students[];
+    String time[];
+
     RecyclerView recyclerView;
     driver_list_Adapter driver_list_adapter;
     RatingBar ratingBar;
@@ -116,10 +119,9 @@ public class MainActivity extends AppCompatActivity
         slidingUpPanelLayout=(SlidingUpPanelLayout)findViewById(R.id.sliding_layout);
 
         slidingUpPanelLayout.setDragView(findViewById(R.id.button2));
-        ratingBar=(RatingBar)findViewById(R.id.rating_3);
 
 
-        t=(Button) findViewById(R.id.button2);
+        t=(ImageView) findViewById(R.id.button2);
 
 
 
@@ -130,21 +132,21 @@ public class MainActivity extends AppCompatActivity
 
         String url="https://anubhavaron000001.000webhostapp.com/cab_dummy_info.php";
         new MyAsyncTaskgetNews().execute(url);
+        Background_cab_list background_cab_list=new Background_cab_list();
+        background_cab_list.execute();
+
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setHasFixedSize(true);
+        driver_list_adapter=new driver_list_Adapter(MainActivity.this);
+        recyclerView.setAdapter(driver_list_adapter);
 
 
         t.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Background_cab_list background_cab_list=new Background_cab_list();
-                background_cab_list.execute();
 
-                LinearLayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setHasFixedSize(true);
-                driver_list_adapter=new driver_list_Adapter(MainActivity.this);
-                recyclerView.setAdapter(driver_list_adapter);
 
-                t.setText("SLIDE ME (Click to Refresh)");
             }
         });
 
@@ -429,7 +431,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     class Background_cab_list extends AsyncTask<Void,Void,String>
-    {   String json_url="https://anubhavaron000001.000webhostapp.com/cab_dummy_info.php";
+    {   String json_url="https://anubhavaron000001.000webhostapp.com/bus_tracking_bus_info.php";
 
         @Override
         protected void onPreExecute() {
@@ -450,42 +452,14 @@ public class MainActivity extends AppCompatActivity
                 double latitude_a=0;
                 double longitude_a=0;
 
+                cab_no=new String[size];
+                teacher=new String[size];
+                driver_name=new String[size];
+                driver_phone_number=new String[size];
+                driver_position=new String[size];
+                no_of_students=new String[size];
+                time=new String[size];
 
-                String cab_no_a;
-                String special_a;
-                String driver_name_a;
-                String driver_phone_a;
-                String driver_position_a;
-                int rating_a;
-                float time_a;
-                double disttance_check=15;
-                int c=0;
-
-                while(count<jsonArray.length())
-                {
-                    JSONObject JO=jsonArray.getJSONObject(count);
-
-                    latitude_a=JO.getDouble("latitude");
-                    longitude_a=JO.getDouble("longitude");
-                    if(distance(latitude,longitude,latitude_a,longitude_a)<=disttance_check)
-                    {
-                        c++;
-                    }
-
-
-
-                    count++;
-                }
-
-                count=0;
-                cab_no=new String[c];
-                special=new String[c];
-                driver_name=new String[c];
-                driver_phone_number=new String[c];
-                driver_position=new String[c];
-                rating=new int[c];
-                time=new double[c];
-                c=0;
                 while(count<jsonArray.length())
                 {
                     JSONObject JO=jsonArray.getJSONObject(count);
@@ -493,22 +467,23 @@ public class MainActivity extends AppCompatActivity
                     latitude_a=JO.getDouble("latitude");
                     longitude_a=JO.getDouble("longitude");
                     double dist=distance(latitude,longitude,latitude_a,longitude_a);
-                    if(dist<=disttance_check)
-                    {   cab_no[c]=JO.getString("cab_no");
-                        driver_position[c]=JO.getString("cab_position");
-                        driver_name[c]=JO.getString("driver_name");
-                        rating[c]=JO.getInt("rating");
-                        driver_phone_number[c]=JO.getString("driver_number");
-                        special[c]=JO.getString("specialisation");
-                        time[c]=2.5*dist;
+                       cab_no[count]=JO.getString("bus_no");
+                        driver_position[count]=JO.getString("bus_position");
+                        driver_name[count]=JO.getString("driver_name");
+                        teacher[count]=JO.getString("teachers_present");
+                        driver_phone_number[count]=JO.getString("driver_number");
+                        no_of_students[count]=JO.getString("no_of_students");
 
-                        c++;
-                    }
+
+                    time[count]=Double.toString(2.5*dist).substring(0,5);
+
+
+
 
                     count++;
                 }
-                driver_list_adapter.swapCursor(getApplicationContext(),driver_name,driver_position,cab_no,driver_phone_number,special,rating,time);
-                Toast.makeText(MainActivity.this,"CHOOSE DRIVER",Toast.LENGTH_LONG).show();
+                driver_list_adapter.swapCursor(getApplicationContext(),cab_no,driver_position,time,driver_name,driver_phone_number,no_of_students,teacher);
+
 
 
 

@@ -17,13 +17,13 @@ import android.widget.TextView;
 public class driver_list_Adapter extends RecyclerView.Adapter<driver_list_Adapter.NUMBERVIEWHOLDER>{
 
 
+    String bus_no[];
+    String bus_position[];
+    String time[];
     String driver_name[];
-    String driver_position[];
-    String cab_no[];
     String driver_phone_number[];
-    String special[];
-    int rating[];
-    double time[];
+    String no_of_students[];
+    String teacher_present[];
     private Context mcontext;
 
     private driver_list_AdapterOnClickHandler mClickHandler;
@@ -57,27 +57,19 @@ public class driver_list_Adapter extends RecyclerView.Adapter<driver_list_Adapte
 
         holder.name.setText(driver_name[position]);
         holder.phone.setText(driver_phone_number[position]);
-        holder.cab_n.setText(cab_no[position]);
-        holder.cab_p.setText(driver_position[position]);
-        holder.spec.setText(special[position]);
-        holder.rate.setRating(rating[position]/2);
-        holder.rate.setFocusableInTouchMode(false);
-        holder.rate.setClickable(false);
-        holder.rate.setIsIndicator(true);
-        holder.timing.setText(String.format(" %.2f", time[position])+" minutes away");
-
-
-
-
-    }
+        holder.cab_n.setText(bus_no[position]);
+        holder.cab_p.setText(bus_position[position]);
+        holder.teacher.setText(teacher_present[position]);
+        holder.no_of_student.setText(no_of_students[position]);
+        holder.time.setText(time[position]);}
 
     @Override
     public int getItemCount() {
 
-        if(cab_no==null)
+        if(bus_no==null)
             return 0;
         else
-            return cab_no.length;
+            return bus_no.length;
     }
 
 
@@ -88,22 +80,22 @@ public class driver_list_Adapter extends RecyclerView.Adapter<driver_list_Adapte
         TextView phone;
         TextView cab_n;
         TextView cab_p;
-        TextView  spec;
-        TextView timing;
-        RatingBar rate;
+        TextView teacher;
+        TextView no_of_student;
+        TextView time;
         public NUMBERVIEWHOLDER(View view)
 
         {
 
             super(view);
-            name=(TextView)view.findViewById(R.id.drivername_3);
-            phone=(TextView)view.findViewById(R.id.driverphonenumber_3);
-            cab_n=(TextView) view.findViewById(R.id.cab_no_3);
-            cab_p=(TextView)view.findViewById(R.id.Position_3);
-            spec=(TextView)view.findViewById(R.id.special_3);
-            timing=(TextView)view.findViewById(R.id.time_3);
-            rate=(RatingBar)view.findViewById(R.id.rating_3);
-            itemView.setOnClickListener(this);
+            name=(TextView)view.findViewById(R.id.name_12);
+            phone=(TextView)view.findViewById(R.id.driver_12);
+            cab_n=(TextView) view.findViewById(R.id.bus_no_12);
+            cab_p=(TextView)view.findViewById(R.id.position_12);
+            teacher=(TextView)view.findViewById(R.id.teacher_12);
+            no_of_student=(TextView)view.findViewById(R.id.student_no_12);
+            time=(TextView) view.findViewById(R.id.time_12);
+           // itemView.setOnClickListener(this);
 
 
         }
@@ -115,18 +107,18 @@ public class driver_list_Adapter extends RecyclerView.Adapter<driver_list_Adapte
 
         }
     }
-    public void swapCursor(Context context,String driver_name_a[],String driver_position_a[], String cab_no_a[],String driver_phone_number_a[],String special_a[],int rating_a[],double time_a[]) {
+    public void swapCursor(Context context,String bus_no[],String bus_position[], String time[],String driver_name[],String driver_phone_number[],String no_of_students[],String teacher_present[]) {
         // Always close the previous mCursor first
 
-        if (driver_name_a != null) {
+        if (bus_no != null) {
             // Force the RecyclerView to refresh
-            driver_name=driver_name_a;
-            driver_position=driver_position_a;
-            cab_no=cab_no_a;
-            driver_phone_number=driver_phone_number_a;
-            special=special_a;
-            rating=rating_a;
-            time=time_a;
+            this.bus_no=bus_no;
+            this.bus_position=bus_position;
+            this.time=time;
+            this.driver_name=driver_name;
+            this.driver_phone_number=driver_phone_number;
+            this.no_of_students=no_of_students;
+            this.teacher_present=teacher_present;
             this.context=context;
             this.notifyDataSetChanged();
         }
