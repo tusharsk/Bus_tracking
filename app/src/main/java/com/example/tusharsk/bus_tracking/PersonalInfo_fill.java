@@ -23,8 +23,8 @@ public class PersonalInfo_fill extends AppCompatActivity {
 
     SaveSettings saveSettings;
     TextView tvname;
-    EditText dob,bg,mobile,age,emergency,gender;
-    String dobs,bgs,mobiles,ages,emergencys,genders;
+    EditText sex,phone,address;
+    String dobs,bgs,cgs;
     Button  bt;
 
     @Override
@@ -46,24 +46,20 @@ public class PersonalInfo_fill extends AppCompatActivity {
         setContentView(R.layout.activity_personal_info_fill);
         //tvname.setText(username);
         bt=(Button) findViewById(R.id.tvsave);
-        dob=(EditText) findViewById(R.id.etdob);
-        bg=(EditText) findViewById(R.id.etbloodgroup);
-        mobile=(EditText) findViewById(R.id.etmobile);
-        age=(EditText) findViewById(R.id.etage);
-        emergency=(EditText) findViewById(R.id.etemergency);
-        gender=(EditText) findViewById(R.id.etgender);
+        sex=(EditText) findViewById(R.id.tvsex);
+        phone=(EditText) findViewById(R.id.tvphone);
+        address=(EditText) findViewById(R.id.tvaddress);
+
     }
 
     public void Save(View view) {
         Toast.makeText(getApplicationContext(), "Details !", Toast.LENGTH_LONG).show();
-        dobs=dob.getText().toString();
-        bgs=bg.getText().toString();
-        mobiles=mobile.getText().toString();
-        ages=age.getText().toString();
-        emergencys=emergency.getText().toString();
-        genders=gender.getText().toString();
-        if(!dobs.matches("")&&!bgs.matches("")&&!mobiles.matches("")&&!ages.matches("")&&!emergencys.matches("")&&!genders.matches("")){
-            String url="https://anubhavaron000001.000webhostapp.com/fillinfo.php?dob="+dobs+"&bloodgroup="+bgs+"&mobile="+mobiles+"&age="+ages+"&emergency="+emergencys+"&gender="+genders+"&flag=1"+"&name="+SaveSettings.UserID;
+        dobs=sex.getText().toString();
+        bgs=phone.getText().toString();
+        cgs=address.getText().toString();
+
+        if(!dobs.matches("")&&!bgs.matches("")&&!cgs.matches("")){
+            String url="https://anubhavaron000001.000webhostapp.com/fillinfo.php?name="+dobs+"&phone="+bgs+"&address"+cgs+"&flag=1"+"&name="+SaveSettings.UserID;
             bt.setEnabled(false);
             new MyAsyncTaskgetNews().execute(url);
         }

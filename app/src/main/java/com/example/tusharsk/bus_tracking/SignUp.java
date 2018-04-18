@@ -42,7 +42,7 @@ public class SignUp extends AppCompatActivity {
         n=etname.getText().toString();
 
         if(!e.matches("")&&(!p.matches(""))&&(!n.matches(""))){
-            String url="https://anubhavaron000001.000webhostapp.com/signup.php?name="+e+"&email="+n+"&password="+p;
+            String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_signup.php?name="+e+"&email="+n+"&password="+p;
             bt.setEnabled(false);
             new MyAsyncTaskgetNews().execute(url);
         }
