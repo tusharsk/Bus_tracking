@@ -120,11 +120,11 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
 
 
         getDeviceLocation();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+       /* if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             return;
         }
-        mMap.setMyLocationEnabled(true);
+        mMap.setMyLocationEnabled(true);*/
         //mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
 
@@ -186,7 +186,7 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
         //Value of origin
         String str_org = "origin=" + latitude +","+longitude;
         //Value of destination
-        String str_dest = "destination=" +2+latitude+","+3.6+longitude;
+        String str_dest = "destination=" +dest.latitude+","+dest.longitude;
         //Set value enable the sensor
         String sensor = "sensor=false";
         //Mode for find direction
