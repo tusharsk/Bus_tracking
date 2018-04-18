@@ -27,6 +27,7 @@
         android:hint="SEX"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:textColor="@color/colorAccent"
         />
     <EditText
         android:id="@+id/tvphone"
@@ -34,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="PHONE NUMBER"
+        android:textColor="@color/colorAccent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         />
@@ -43,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:hint="ADDRESS"
+        android:textColor="@color/colorAccent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         />
