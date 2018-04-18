@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_gallery) {
 
             //It is a activity of History
-            Intent intent=new Intent(getApplicationContext(),History.class);
+            Intent intent=new Intent(getApplicationContext(),Direction.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_slideshow) {
@@ -649,6 +649,14 @@ public class MainActivity extends AppCompatActivity
 
 
     }
+
+
+
+
+
+
+
+
 
 
 }

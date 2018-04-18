@@ -12,8 +12,8 @@
 
     <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
         android:id="@+id/sliding_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
         android:gravity="bottom"
         sothree:umanoPanelHeight="50dp"
         tools:layout_editor_absoluteX="8dp"
@@ -35,7 +35,7 @@
                 map:layout_constraintLeft_toLeftOf="parent"
                 map:layout_constraintRight_toRightOf="parent"
                 map:layout_constraintTop_toTopOf="parent"
-                tools:context="com.example.tusharsk.ambulance247.MainActivity" />
+                tools:context="com.example.tusharsk.bus_tracking.MainActivity" />
 
 
             <RelativeLayout

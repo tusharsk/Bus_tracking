@@ -47,6 +47,7 @@
             android:parentActivityName=".MainActivity" />
         <activity android:name=".PersonalInfo_show" />
         <activity android:name=".History" />
+        <activity android:name=".Direction"></activity>
     </application>
 
 </manifest>
