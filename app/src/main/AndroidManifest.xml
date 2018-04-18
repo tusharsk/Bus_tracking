@@ -67,6 +67,7 @@
         <activity android:name=".Direction"
             android:icon="@drawable/directions"
             android:roundIcon="@drawable/directions"
+            android:parentActivityName=".MainActivity"
             android:label="Directions">
 
         </activity>
