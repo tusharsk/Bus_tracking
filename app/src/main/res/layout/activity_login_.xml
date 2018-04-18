@@ -42,23 +42,25 @@
         android:id="@+id/et_password"
         android:hint="Enter your password"
         />
+
     <Button
+        android:id="@+id/login"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/et_password"
         android:layout_marginTop="20dp"
-        android:text="LOGIN"
         android:background="#8D6E63"
-        android:id="@+id/Login"
-        />
+        android:onClick="login"
+        android:text="LOGIN" />
+
     <Button
+        android:id="@+id/signup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/Login"
+        android:layout_below="@+id/login"
         android:layout_marginTop="10dp"
-        android:text="Not existing user?Sign In"
-        android:textAllCaps="false"
         android:background="#8D6E63"
-        android:id="@+id/signup"
-        />
+        android:onClick="register"
+        android:text="Not existing user?Sign In"
+        android:textAllCaps="false" />
 </RelativeLayout>

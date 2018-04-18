@@ -28,7 +28,7 @@ public class Login_Activity extends AppCompatActivity {
     EditText etPassword;
     String email;
     String password;
-    Button bt,btsign;
+    Button btlogin,btsign;
     ViewPager viewPager;
     LinearLayout sliderDotspanel;
     private int dotscount;
@@ -40,7 +40,7 @@ public class Login_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_login_);
         etEmail=(EditText)findViewById(R.id.et_email);
         etPassword=(EditText)findViewById(R.id.et_password);
-        bt=(Button) findViewById(R.id.Login);
+        btlogin=(Button) findViewById(R.id.login);
         btsign=(Button) findViewById(R.id.signup);
 
         viewPager = (ViewPager) findViewById(R.id.viewPager);
@@ -101,7 +101,7 @@ public class Login_Activity extends AppCompatActivity {
         if(!email.matches("")&&!password.matches(""))
         {
             String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_login.php?email="+email+"&password="+password;
-            bt.setEnabled(false);
+            btlogin.setEnabled(false);
             btsign.setEnabled(false);
             new MyAsyncTaskgetNews().execute(url);
         }
