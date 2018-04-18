@@ -24,16 +24,16 @@ public class SaveSettings {
     void SaveData(String UserID,String user_name,String flag){
 
         SharedPreferences.Editor editor=ShredRef.edit();
-        editor.putString("UserID",UserID);
-        editor.putString("user_name",user_name);
+        editor.putString("name",UserID);
+        editor.putString("email",user_name);
         editor.putString("flag",flag);
         editor.commit();
         LoadData();
     }
 
     void LoadData(){
-        UserID= ShredRef.getString("UserID","0");
-        user_name=ShredRef.getString("user_name",null);
+        UserID= ShredRef.getString("name","0");
+        user_name=ShredRef.getString("email",null);
         flag=ShredRef.getString("flag",null);
         if (UserID.equals("0")){
 
@@ -45,7 +45,7 @@ public class SaveSettings {
     }
     String UserPresent()
     {
-        UserID= ShredRef.getString("UserID","0");
+        UserID= ShredRef.getString("name","0");
         if(UserID.equals("0"))
             return "0";
         else

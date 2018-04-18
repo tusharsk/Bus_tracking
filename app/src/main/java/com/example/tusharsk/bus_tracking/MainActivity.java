@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity
 
         CheckUserPermsions();
 
-        String url="https://anubhavaron000001.000webhostapp.com/cab_dummy_info.php";
+        String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_bus_info.php";
         new MyAsyncTaskgetNews().execute(url);
         Background_cab_list background_cab_list=new Background_cab_list();
         background_cab_list.execute();
@@ -601,7 +601,7 @@ public class MainActivity extends AppCompatActivity
                     double Ambulance_latitude=UserCreintal.getDouble("latitude");
                     double Ambulance_longitude=UserCreintal.getDouble("longitude");
                     LatLng sydney = new LatLng(Ambulance_latitude,Ambulance_longitude);
-                    MarkerOptions options=new MarkerOptions().position(sydney).title("CAB"+i+1);
+                    MarkerOptions options=new MarkerOptions().position(sydney).title("CAB"+i+1).icon(BitmapDescriptorFactory.fromResource(R.mipmap.cab));
                     mMap.addMarker(options);
                 }
 

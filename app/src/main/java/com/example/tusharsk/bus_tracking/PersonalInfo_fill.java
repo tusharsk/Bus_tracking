@@ -59,7 +59,7 @@ public class PersonalInfo_fill extends AppCompatActivity {
         cgs=address.getText().toString();
 
         if(!dobs.matches("")&&!bgs.matches("")&&!cgs.matches("")){
-            String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_personal_info.php?name="+dobs+"&phone="+bgs+"&address"+cgs+"&flag=1"+"&name="+SaveSettings.UserID;
+            String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_fillprofile.php?phone_no="+bgs+"&address="+cgs+"&sex="+dobs+"&flag=1"+"&email="+SaveSettings.user_name;
             bt.setEnabled(false);
             new MyAsyncTaskgetNews().execute(url);
         }

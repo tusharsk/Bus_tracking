@@ -76,7 +76,7 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
         time=(TextView)findViewById(R.id.tvtime);
 
         Spinner spinnerCountShoes = (Spinner)findViewById(R.id.spinner_history);
-        bus_no.add("CHOOSE BUS NO");bus_no.add("DL5S-8285");bus_no.add("DL87-1025");
+        bus_no.add("       CHOOSE BUS NO        ");bus_no.add("DL5S-8285");bus_no.add("DL87-1025");
         bus_no.add("DL8q-7412");bus_no.add("DL9A-7456");bus_no.add("DL0q-1235");
         bus_no.add("DL98-0123");bus_no.add("DL9Q-7530");bus_no.add("DL7S-9895");
         bus_no.add("DL96-4758");bus_no.add("DL0P-5252");bus_no.add("DL9Q-7878");
@@ -151,7 +151,7 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
                 JSONObject json= new JSONObject(progress[0]);
 
                 if (json.getString("msg").equalsIgnoreCase("Pass Login")) {
-                    Toast.makeText(getApplicationContext(), json.getString("msg"), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), json.getString("msg"), Toast.LENGTH_SHORT).show();
                     //login
 
                     JSONArray UserInfo=new JSONArray( json.getString("info"));
@@ -163,9 +163,10 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
                     teacher.setText(UserCreintal.getString("teachers_present"));
                     nostudent.setText(UserCreintal.getString("no_of_students"));
                     position.setText(UserCreintal.getString("bus_position"));
-                    //time.setText(UserCreintal.getString(""));
+                    double d=distance(latitude,longitude,UserCreintal.getDouble("latitude"),UserCreintal.getDouble("longitude"));
+                    time.setText((int) (d*2.5)+" minutes");
 
-                    Toast.makeText(getApplicationContext(), " wl", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), " wl", Toast.LENGTH_SHORT).show();
 
                     dest_longitude=UserCreintal.getString("longitude");
                     dest_latitude=UserCreintal.getString("latitude");
@@ -310,9 +311,30 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
 
 
 
+    double distance(double lat1, double lon1, double lat2, double lon2) {
+        double theta = lon1 - lon2;
+        double dist = Math.sin(deg2rad(lat1))
+                * Math.sin(deg2rad(lat2))
+                + Math.cos(deg2rad(lat1))
+                * Math.cos(deg2rad(lat2))
+                * Math.cos(deg2rad(theta));
+        dist = Math.acos(dist);
+        dist = rad2deg(dist);
+        dist = dist * 60 * 1.1515;
+        return (dist);
+    }
+
+    private double deg2rad(double deg) {
+        return (deg * Math.PI / 180.0);
+    }
+
+    private double rad2deg(double rad) {
+        return (rad * 180.0 / Math.PI);
+    }
+
     public void getDirection()
     {
-        Toast.makeText(getApplicationContext(), " direction", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(), " direction", Toast.LENGTH_SHORT).show();
         String url = getRequestUrl();
         TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
         taskRequestDirections.execute(url);

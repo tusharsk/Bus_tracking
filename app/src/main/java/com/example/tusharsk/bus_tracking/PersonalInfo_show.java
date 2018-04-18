@@ -31,7 +31,7 @@ public class PersonalInfo_show extends AppCompatActivity {
         tvgender=(TextView) findViewById(R.id.tvgender);
         tvaddress=(TextView) findViewById(R.id.tvaddress);
         Toast.makeText(this," id "+SaveSettings.UserID,Toast.LENGTH_SHORT).show();
-        String url="https://anubhavaron000001.000webhostapp.com/show.php?name="+SaveSettings.UserID;
+        String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_personal_show.php?name="+SaveSettings.UserID;
         new MyAsyncTaskgetNews().execute(url);
     }
 
