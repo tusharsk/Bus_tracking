@@ -31,7 +31,7 @@ public class PersonalInfo_show extends AppCompatActivity {
         tvgender=(TextView) findViewById(R.id.tvgender);
         tvaddress=(TextView) findViewById(R.id.tvaddress);
         Toast.makeText(this," id "+SaveSettings.UserID,Toast.LENGTH_SHORT).show();
-        String url="https://anubhavaron000001.000webhostapp.com/show.php?name="+SaveSettings.UserID;
+        String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_show.php?name="+SaveSettings.UserID;
         new MyAsyncTaskgetNews().execute(url);
     }
 
@@ -83,8 +83,8 @@ public class PersonalInfo_show extends AppCompatActivity {
                     JSONObject jsonObject=jsonArray.getJSONObject(0);
 
                     //Toast.makeText(getApplicationContext(),"t"+jsonObject.getString("name"),Toast.LENGTH_SHORT).show();
-                    tvname.setText("Name:   "+jsonObject.getString("email"));
-                    tvmobile.setText("Mobile:    "+jsonObject.getString("mobile"));
+                    tvname.setText("Name:   "+jsonObject.getString("name"));
+                    tvmobile.setText("Mobile:    "+jsonObject.getString("phone_no"));
                     tvemail.setText( "Email:     "+jsonObject.getString("email"));
                     tvpassword.setText("Password:   "+jsonObject.getString("password"));
                     tvgender.setText("Gender:     "+jsonObject.getString("sex"));

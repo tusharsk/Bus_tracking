@@ -36,6 +36,8 @@ public class PersonalInfo_fill extends AppCompatActivity {
         saveSettings=new SaveSettings(getApplicationContext());
         String username=saveSettings.Username();
         String flag=SaveSettings.flag;
+
+
         if(!(flag.matches("null")))
         {
             Intent intent=new Intent(getApplicationContext(),PersonalInfo_show.class);
