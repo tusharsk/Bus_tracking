@@ -2,6 +2,7 @@ package com.example.tusharsk.bus_tracking;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -27,13 +28,16 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -50,28 +54,40 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
 
     private GoogleMap mMap;
     double   latitude=0,longitude=0;
-    LatLng dest;
+    String dest_longitude,dest_latitude;
     private static final int LOCATION_REQUEST = 500;
     ArrayList<String> bus_no=new ArrayList<String>();
 
+    int ready=0;
+
+    TextView dname,dno,teacher,nostudent,position,time;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_direction);
+
+        dname=(TextView)findViewById(R.id.tvdrivername);
+        dno=(TextView)findViewById(R.id.tvdriverno);
+        teacher=(TextView)findViewById(R.id.tvteacher);
+        nostudent=(TextView)findViewById(R.id.tvstudent);
+        position=(TextView)findViewById(R.id.tvposition);
+        time=(TextView)findViewById(R.id.tvtime);
+
         Spinner spinnerCountShoes = (Spinner)findViewById(R.id.spinner_history);
         bus_no.add("CHOOSE BUS NO");bus_no.add("DL5S-8285");bus_no.add("DL87-1025");
         bus_no.add("DL8q-7412");bus_no.add("DL9A-7456");bus_no.add("DL0q-1235");
         bus_no.add("DL98-0123");bus_no.add("DL9Q-7530");bus_no.add("DL7S-9895");
         bus_no.add("DL96-4758");bus_no.add("DL0P-5252");bus_no.add("DL9Q-7878");
         bus_no.add("DL3S-5836");bus_no.add("DL3P-5877");
+
+
         ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, bus_no);
         spinnerCountShoes.setAdapter(spinnerCountShoesArrayAdapter);
 
 
         CheckUserPermsions();
-        String url="https://anubhavaron000001.000webhostapp.com/cab_dummy_info.php";
         spinnerCountShoes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -79,7 +95,9 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
                 if(position!=0)
                 {
 
-                       Toast.makeText(Direction.this,bus_no.get(position),Toast.LENGTH_LONG).show();
+                    Toast.makeText(Direction.this,bus_no.get(position),Toast.LENGTH_SHORT).show();
+                    String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_bus_detail.php?bus_no="+bus_no.get(position);
+                    new MyAsyncTaskgetNews().execute(url);
 
                 }
 
@@ -91,6 +109,88 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
             }
 
         });
+    }
+
+
+    public class MyAsyncTaskgetNews extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            //before works
+        }
+        @Override
+        protected String  doInBackground(String... params) {
+            // TODO Auto-generated method stub
+            try {
+                String NewsData;
+                //define the url we have to connect with
+                URL url = new URL(params[0]);
+                //make connect with url and send request
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                //waiting for 7000ms for response
+                urlConnection.setConnectTimeout(7000);//set timeout to 5 seconds
+
+                try {
+                    //getting the response data
+                    InputStream in = new BufferedInputStream(urlConnection.getInputStream());
+                    //convert the stream to string
+                    Operations operations=new Operations(getApplicationContext());
+                    NewsData = operations.ConvertInputToStringNoChange(in);
+                    //send to display data
+                    publishProgress(NewsData);
+                } finally {
+                    //end connection
+                    urlConnection.disconnect();
+                }
+
+            }catch (Exception ex){}
+            return null;
+        }
+        protected void onProgressUpdate(String... progress) {
+
+            try {
+                JSONObject json= new JSONObject(progress[0]);
+
+                if (json.getString("msg").equalsIgnoreCase("Pass Login")) {
+                    Toast.makeText(getApplicationContext(), json.getString("msg"), Toast.LENGTH_SHORT).show();
+                    //login
+
+                    JSONArray UserInfo=new JSONArray( json.getString("info"));
+                    JSONObject UserCreintal= UserInfo.getJSONObject(0);
+
+
+                    dname.setText(UserCreintal.getString("driver_name"));
+                    dno.setText(UserCreintal.getString("driver_number"));
+                    teacher.setText(UserCreintal.getString("teachers_present"));
+                    nostudent.setText(UserCreintal.getString("no_of_students"));
+                    position.setText(UserCreintal.getString("bus_position"));
+                    //time.setText(UserCreintal.getString(""));
+
+                    Toast.makeText(getApplicationContext(), " wl", Toast.LENGTH_SHORT).show();
+
+                    dest_longitude=UserCreintal.getString("longitude");
+                    dest_latitude=UserCreintal.getString("latitude");
+
+                    getDirection();
+                }
+
+                //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.cab))
+                //.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)
+
+            } catch (Exception ex) {
+                //Log.d("er",  ex.getMessage());
+            }
+
+
+        }
+
+        protected void onPostExecute(String  result2){
+
+
+        }
+
+
+
+
     }
 
     void CheckUserPermsions() {
@@ -152,11 +252,11 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
 
 
         getDeviceLocation();
-       /* if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
             return;
         }
-        mMap.setMyLocationEnabled(true);*/
+        mMap.setMyLocationEnabled(true);
         //mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
 
@@ -188,7 +288,10 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
                         longitude=currentLocation.getLongitude();
                         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
                         mMap.animateCamera(CameraUpdateFactory.zoomTo(15.0f ));
-                        getDirection();
+
+                        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+                        ready=0;
+                        //getDirection();
                         //moveCamera(new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude()),DEFAULT_ZOOM);
 
                     }else{
@@ -209,16 +312,18 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
 
     public void getDirection()
     {
+        Toast.makeText(getApplicationContext(), " direction", Toast.LENGTH_SHORT).show();
         String url = getRequestUrl();
         TaskRequestDirections taskRequestDirections = new TaskRequestDirections();
         taskRequestDirections.execute(url);
+
     }
 
     private String getRequestUrl( ) {
         //Value of origin
         String str_org = "origin=" + latitude +","+longitude;
         //Value of destination
-        String str_dest = "destination=" +dest.latitude+","+dest.longitude;
+        String str_dest = "destination=" +dest_latitude+","+dest_longitude;
         //Set value enable the sensor
         String sensor = "sensor=false";
         //Mode for find direction

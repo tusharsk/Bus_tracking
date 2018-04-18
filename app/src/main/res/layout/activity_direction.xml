@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.tusharsk.bus_tracking.Direction">
+    tools:context="com.example.tusharsk.bus_tracking.Direction"
+    android:background="#8D6E63">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -13,7 +14,7 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="380dp"
+        android:layout_height="425dp"
         map:layout_constraintBottom_toBottomOf="parent"
         map:layout_constraintHorizontal_bias="0.0"
         map:layout_constraintLeft_toLeftOf="parent"
@@ -27,7 +28,69 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/map"
-         />
+        android:background="#8D6E63"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:background="#FFECB3">
+
+        <TextView
+            android:id="@+id/tvdrivername"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:text="TextView"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvdriverno"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="TextView"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:background="#FFECB3">
+
+        <TextView
+            android:id="@+id/tvteacher"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:text="TextView"
+            android:textSize="18sp"
+            android:background="#FFECB3"/>
+
+        <TextView
+            android:id="@+id/tvstudent"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="TextView"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:background="#FFECB3">
+
+        <TextView
+            android:id="@+id/tvposition"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:text="TextView"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvtime"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:text="TextView"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 
 </LinearLayout>

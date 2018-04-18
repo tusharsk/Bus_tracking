@@ -95,12 +95,12 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        /*saveSettings= new SaveSettings(getApplicationContext());
+        saveSettings= new SaveSettings(getApplicationContext());
         saveSettings.LoadData();
         if(saveSettings.UserPresent().matches("0"))
         {
             finish();
-        }*/
+        }
 
 
 

@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Bus_tracking.iml" filepath="$PROJECT_DIR$/Bus_tracking.iml" />
       <module fileurl="file://C:\Users\pc\AndroidStudioProjects\Bus_tracking\Bus_tracking.iml" filepath="C:\Users\pc\AndroidStudioProjects\Bus_tracking\Bus_tracking.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\pc\AndroidStudioProjects\Bus_tracking\app\app.iml" filepath="C:\Users\pc\AndroidStudioProjects\Bus_tracking\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
 </project>
