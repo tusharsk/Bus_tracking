@@ -4,5 +4,5 @@
     android:dither="true">
 
     <size android:height="12dip" android:width="12dip"/>
-    <solid android:background="@drawable/pro_fr"/>
+    <solid android:background="@drawable/profile_back"/>
 </shape>
