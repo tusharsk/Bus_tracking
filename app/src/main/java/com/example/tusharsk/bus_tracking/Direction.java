@@ -12,7 +12,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,17 +52,54 @@ public class Direction extends AppCompatActivity implements  OnMapReadyCallback 
     double   latitude=0,longitude=0;
     LatLng dest;
     private static final int LOCATION_REQUEST = 500;
+    ArrayList<String> bus_no=new ArrayList<String>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_direction);
-
-
+        Spinner spinnerCountShoes = (Spinner)findViewById(R.id.spinner_history);
+        bus_no.add("CHOOSE BUS NO");
+        bus_no.add("DL5S-8285");
+        bus_no.add("DL87-1025");
+        bus_no.add("DL8q-7412");
+        bus_no.add("DL9A-7456");
+        bus_no.add("DL98-0123");
+        bus_no.add("DL9Q-7530");
+        bus_no.add("DL7S-9895");
+        bus_no.add("DL96-4758");
+        bus_no.add("DL0P-5252");
+        bus_no.add("DL9Q-7878");
+        bus_no.add("DL0q-1235");
+        bus_no.add("DL3S-5836");
+        bus_no.add("DL3P-5877");
+        ArrayAdapter<String> spinnerCountShoesArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, bus_no);
+        spinnerCountShoes.setAdapter(spinnerCountShoesArrayAdapter);
 
 
         CheckUserPermsions();
         String url="https://anubhavaron000001.000webhostapp.com/cab_dummy_info.php";
+        spinnerCountShoes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                if(position!=0)
+                {
+
+                       Toast.makeText(Direction.this,bus_no.get(position),Toast.LENGTH_LONG).show();
+
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
     }
 
     void CheckUserPermsions() {
