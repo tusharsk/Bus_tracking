@@ -35,7 +35,7 @@ public class SaveSettings {
         UserID= ShredRef.getString("name","0");
         user_name=ShredRef.getString("email",null);
         flag=ShredRef.getString("flag",null);
-        if (UserID.equals("0")){
+        if (user_name.equals("0")){
 
             Intent intent=new Intent(context, Login_Activity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -45,11 +45,11 @@ public class SaveSettings {
     }
     String UserPresent()
     {
-        UserID= ShredRef.getString("name","0");
-        if(UserID.equals("0"))
+        user_name= ShredRef.getString("name","0");
+        if(user_name.equals("0"))
             return "0";
         else
-            return UserID;
+            return user_name;
     }
 
     String Username()

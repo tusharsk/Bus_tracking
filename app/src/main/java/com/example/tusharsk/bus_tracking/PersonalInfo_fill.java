@@ -34,7 +34,7 @@ public class PersonalInfo_fill extends AppCompatActivity {
 
 
         saveSettings=new SaveSettings(getApplicationContext());
-        String username=saveSettings.Username();
+
         String flag=SaveSettings.flag;
         if(!(flag.matches("null")))
         {
@@ -120,8 +120,9 @@ public class PersonalInfo_fill extends AppCompatActivity {
         }
 
         protected void onPostExecute(String  result2){
-            Toast.makeText(getApplicationContext(),"Details Filled!", Toast.LENGTH_LONG).show();
             SaveSettings.flag="1";
+            Toast.makeText(getApplicationContext(),SaveSettings.flag, Toast.LENGTH_LONG).show();
+
             Intent intent=new Intent(getApplicationContext(),PersonalInfo_show.class);
             startActivity(intent);
             finish();

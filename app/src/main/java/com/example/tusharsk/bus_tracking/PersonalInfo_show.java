@@ -30,8 +30,8 @@ public class PersonalInfo_show extends AppCompatActivity {
         tvpassword=(TextView) findViewById(R.id.tvpassword);
         tvgender=(TextView) findViewById(R.id.tvgender);
         tvaddress=(TextView) findViewById(R.id.tvaddress);
-        Toast.makeText(this," id "+SaveSettings.UserID,Toast.LENGTH_SHORT).show();
-        String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_show.php?name="+SaveSettings.UserID;
+        Toast.makeText(this," id "+SaveSettings.flag,Toast.LENGTH_SHORT).show();
+        String url="https://anubhavaron000001.000webhostapp.com/bus_tracking_show.php?name="+SaveSettings.user_name;
         new MyAsyncTaskgetNews().execute(url);
     }
 
